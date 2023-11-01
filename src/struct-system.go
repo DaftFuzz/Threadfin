@@ -209,6 +209,7 @@ type XEPGChannelStruct struct {
 	XUpdateChannelIcon bool   `json:"x-update-channel-icon"`
 	XUpdateChannelName bool   `json:"x-update-channel-name"`
 	XDescription       string `json:"x-description"`
+	XReferer           string `json:"x-referer,required"`
 	Live               bool   `json:"live"`
 	IsBackupChannel    bool   `json:"is_backup_channel"`
 	BackupChannel1URL  string `json:"backup_channel_1_url"`
@@ -230,6 +231,7 @@ type M3UChannelStructXEPG struct {
 	UUIDKey     string `json:"_uuid.key,required"`
 	UUIDValue   string `json:"_uuid.value,required"`
 	Values      string `json:"_values,required"`
+	Referer     string `json:"referer,required"`
 }
 
 // FilterStruct : Filter Struktur

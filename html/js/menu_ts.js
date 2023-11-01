@@ -1483,6 +1483,12 @@ function openPopUp(dataType, element) {
             input.setAttribute("placeholder", "{{.mapping.description.placeholder}}");
             input.setAttribute("onchange", "javascript: this.className = 'changed'");
             content.appendRow("{{.mapping.description.title}}", input);
+            //Referer
+            var dbKey = "x-referer";
+            var input = content.createInput("text", dbKey, data[dbKey]);
+            input.setAttribute("placeholder", "{{.mapping.channelReferer.placeholder}}");
+            input.setAttribute("onchange", "javascript: this.className = 'changed'");
+            content.appendRow("{{.mapping.channelReferer.title}}", input)
             // Aktualisierung des Kanalnamens
             if (data.hasOwnProperty("_uuid.key")) {
                 if (data["_uuid.key"] != "") {

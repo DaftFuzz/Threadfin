@@ -62,7 +62,7 @@ func MakeInterfaceFromM3U(byteStream []byte) (allChannels []interface{}, err err
 							}
 
 							// URL's nicht an die Filterfunktion übergeben
-							if !strings.Contains(parameter[1], "://") && len(parameter[1]) > 0 {
+							if !strings.Contains(parameter[0], "referer") && !strings.Contains(parameter[1], "://") && len(parameter[1]) > 0 {
 								value = value + parameter[1] + " "
 							}
 

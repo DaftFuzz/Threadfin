@@ -221,6 +221,12 @@
       "placeholder": "Used by the Dummy as an XML description",
       "description": ""
     },
+    "channelReferer":
+    {
+      "title": "Referer",
+      "placeholder": "",
+      "description": "If a Referer header is required for the stream to authenticate, enter it here"
+    },
     "updateChannelName": {
       "title": "Update Channel Name",
       "placeholder": "",

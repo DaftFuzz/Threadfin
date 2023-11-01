@@ -4,7 +4,7 @@ FROM golang:1.18 AS builder
 
 # Download the source code
 RUN apt-get update && apt-get install -y git
-RUN git clone https://github.com/Threadfin/Threadfin.git /src
+RUN git clone https://github.com/DaftFuzz/Threadfin.git /src
 
 WORKDIR /src
 
@@ -26,13 +26,12 @@ ARG THREADFIN_VERSION
 LABEL org.label-schema.build-date="{$BUILD_DATE}" \
       org.label-schema.name="Threadfin" \
       org.label-schema.description="Dockerized Threadfin" \
-      org.label-schema.url="https://hub.docker.com/r/fyb3roptik/threadfin/" \
+      org.label-schema.url="https://docker.fuzzflix.com/threadfin/" \
       org.label-schema.vcs-ref="{$VCS_REF}" \
-      org.label-schema.vcs-url="https://github.com/Threadfin/Threadfin" \
+      org.label-schema.vcs-url="https://github.com/DaftFuzz/Threadfin" \
       org.label-schema.vendor="Threadfin" \
       org.label-schema.version="{$THREADFIN_VERSION}" \
-      org.label-schema.schema-version="1.0" \
-      DISCORD_URL="https://discord.gg/bEPPNP2VG8"
+      org.label-schema.schema-version="1.0"
 
 ENV THREADFIN_BIN=/home/threadfin/bin
 ENV THREADFIN_CONF=/home/threadfin/conf

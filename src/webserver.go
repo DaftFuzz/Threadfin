@@ -194,7 +194,23 @@ func Stream(w http.ResponseWriter, r *http.Request) {
 		showInfo("Streaming Info:Threadfin is no longer involved, the client connects directly to the streaming server.")
 
 	default:
-		bufferingStream(streamInfo.PlaylistID, streamInfo.URL, streamInfo.BackupChannel1URL, streamInfo.BackupChannel2URL, streamInfo.BackupChannel3URL, streamInfo.Name, w, r)
+		var channelId = streamInfo.ChannelNumber
+		var referer = ""
+		showInfo(channelId)
+
+		for _, dxc := range Data.XEPG.Channels {
+			var xepgChannel XEPGChannelStruct
+			err = json.Unmarshal([]byte(mapToJSON(dxc)), &xepgChannel)
+			if err != nil {
+				return
+			}
+
+			if xepgChannel.XChannelID == channelId {
+				referer = xepgChannel.XReferer
+			}
+		}
+
+		bufferingStream(streamInfo.PlaylistID, streamInfo.URL, streamInfo.BackupChannel1URL, streamInfo.BackupChannel2URL, streamInfo.BackupChannel3URL, streamInfo.Name, referer, w, r)
 
 	}
 

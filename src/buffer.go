@@ -46,7 +46,7 @@ func createStreamID(stream map[int]ThisStream) (streamID int) {
 	return
 }
 
-func bufferingStream(playlistID, streamingURL, backupStreamingURL1, backupStreamingURL2, backupStreamingURL3, channelName string, w http.ResponseWriter, r *http.Request) {
+func bufferingStream(playlistID, streamingURL, backupStreamingURL1, backupStreamingURL2, backupStreamingURL3, channelName string, channelReferer string, w http.ResponseWriter, r *http.Request) {
 
 	time.Sleep(time.Duration(Settings.BufferTimeout) * time.Millisecond)
 
@@ -104,6 +104,7 @@ func bufferingStream(playlistID, streamingURL, backupStreamingURL1, backupStream
 		stream.BackupChannel3URL = backupStreamingURL3
 		stream.ChannelName = channelName
 		stream.Status = false
+		stream.ChannelReferer = channelReferer
 
 		playlist.Streams[streamID] = stream
 		playlist.Clients[streamID] = client
@@ -222,7 +223,7 @@ func bufferingStream(playlistID, streamingURL, backupStreamingURL1, backupStream
 		case "threadfin":
 			go connectToStreamingServer(streamID, playlistID)
 		case "ffmpeg", "vlc":
-			go thirdPartyBuffer(streamID, playlistID, false, 0)
+			go thirdPartyBuffer(streamID, playlistID, false, 0, channelReferer)
 
 		default:
 			break
@@ -1429,7 +1430,7 @@ func switchBandwidth(stream *ThisStream) (err error) {
 }
 
 // Buffer mit FFMPEG
-func thirdPartyBuffer(streamID int, playlistID string, useBackup bool, backupNumber int) {
+func thirdPartyBuffer(streamID int, playlistID string, useBackup bool, backupNumber int, channelReferer string) {
 
 	if p, ok := BufferInformation.Load(playlistID); ok {
 
@@ -1488,13 +1489,13 @@ func thirdPartyBuffer(streamID int, playlistID string, useBackup bool, backupNum
 		var addErrorToStream = func(err error) {
 
 			if !useBackup && backupNumber == 0 && playlist.Streams[streamID].BackupChannel1URL == "" {
-				thirdPartyBuffer(streamID, playlistID, false, -1)
+				thirdPartyBuffer(streamID, playlistID, false, -1, channelReferer)
 				return
 			}
 
 			if !useBackup || (useBackup && backupNumber >= 0 && backupNumber <= 3) {
 				backupNumber = backupNumber + 1
-				thirdPartyBuffer(streamID, playlistID, true, backupNumber)
+				thirdPartyBuffer(streamID, playlistID, true, backupNumber, channelReferer)
 				return
 			}
 
@@ -1553,6 +1554,10 @@ func thirdPartyBuffer(streamID int, playlistID string, useBackup bool, backupNum
 				if i == 0 {
 					if len(Settings.UserAgent) != 0 {
 						args = []string{"-user_agent", Settings.UserAgent}
+					}
+
+					if len(channelReferer) != 0 {
+						args = append(args, "-headers", "Referer:"+channelReferer)
 					}
 				}
 

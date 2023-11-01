@@ -495,6 +495,13 @@ func createXEPGDatabase() (err error) {
 				xepgChannel.TvgLogo = imgc.Image.GetURL(m3uChannel.TvgLogo, Settings.HttpThreadfinDomain, Settings.ForceHttps, Settings.HttpsPort, Settings.HttpsThreadfinDomain)
 			}
 
+			xepgChannel.XReferer = m3uChannel.Referer
+
+			// xepgChannel.XmltvFile = "Threadfin Dummy"
+			// xepgChannel.XMapping = ""
+			// xepgChannel.XCategory = "sports"
+			// xepgChannel.XActive = true
+
 			Data.XEPG.Channels[currentXEPGID] = xepgChannel
 
 		case false:
@@ -530,8 +537,9 @@ func createXEPGDatabase() (err error) {
 			newChannel.TvgLogo = m3uChannel.TvgLogo
 			newChannel.TvgName = m3uChannel.TvgName
 			newChannel.URL = m3uChannel.URL
-			newChannel.XmltvFile = ""
-			newChannel.XMapping = ""
+			// newChannel.XmltvFile = "Threadfin Dummy"
+			// newChannel.XMapping = ""
+			// newChannel.XCategory = "sports"
 
 			if len(m3uChannel.UUIDKey) > 0 {
 				newChannel.UUIDKey = m3uChannel.UUIDKey
@@ -542,6 +550,9 @@ func createXEPGDatabase() (err error) {
 			newChannel.XGroupTitle = m3uChannel.GroupTitle
 			newChannel.XEPG = xepg
 			newChannel.XChannelID = xChannelID
+			newChannel.XReferer = m3uChannel.Referer
+
+			// newChannel.XActive = true
 
 			Data.XEPG.Channels[xepg] = newChannel
 
