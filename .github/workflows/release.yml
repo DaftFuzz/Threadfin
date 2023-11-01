@@ -54,4 +54,4 @@ jobs:
           push: true
           no-cache: true
           platforms: linux/amd64
-          tags: daftfuzz/threadfin:dev
+          tags: ${{ secrets.DOCKER_URL }}/daftfuzz/threadfin:dev
