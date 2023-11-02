@@ -366,22 +366,8 @@ func createXEPGDatabase() (err error) {
 	showInfo("XEPG:" + "Update database")
 
 	// Kanal mit fehlenden Kanalnummern löschen.  Delete channel with missing channel numbers
-	for id, dxc := range Data.XEPG.Channels {
-
-		var xepgChannel XEPGChannelStruct
-		err = json.Unmarshal([]byte(mapToJSON(dxc)), &xepgChannel)
-		if err != nil {
-			return
-		}
-
-		if len(xepgChannel.XChannelID) == 0 {
-			delete(Data.XEPG.Channels, id)
-		}
-
-		if xChannelID, err := strconv.ParseFloat(xepgChannel.XChannelID, 64); err == nil {
-			allChannelNumbers = append(allChannelNumbers, xChannelID)
-		}
-
+	for id := range Data.XEPG.Channels {
+		delete(Data.XEPG.Channels, id)
 	}
 
 	// Make a map of the db channels based on their previously downloaded attributes -- filename, group, title, etc
@@ -497,11 +483,6 @@ func createXEPGDatabase() (err error) {
 
 			xepgChannel.XReferer = m3uChannel.Referer
 
-			// xepgChannel.XmltvFile = "Threadfin Dummy"
-			// xepgChannel.XMapping = ""
-			// xepgChannel.XCategory = "sports"
-			// xepgChannel.XActive = true
-
 			Data.XEPG.Channels[currentXEPGID] = xepgChannel
 
 		case false:
@@ -537,9 +518,8 @@ func createXEPGDatabase() (err error) {
 			newChannel.TvgLogo = m3uChannel.TvgLogo
 			newChannel.TvgName = m3uChannel.TvgName
 			newChannel.URL = m3uChannel.URL
-			// newChannel.XmltvFile = "Threadfin Dummy"
-			// newChannel.XMapping = ""
-			// newChannel.XCategory = "sports"
+			newChannel.XCategory = "sports"
+			newChannel.Live = true
 
 			if len(m3uChannel.UUIDKey) > 0 {
 				newChannel.UUIDKey = m3uChannel.UUIDKey
@@ -551,8 +531,6 @@ func createXEPGDatabase() (err error) {
 			newChannel.XEPG = xepg
 			newChannel.XChannelID = xChannelID
 			newChannel.XReferer = m3uChannel.Referer
-
-			// newChannel.XActive = true
 
 			Data.XEPG.Channels[xepg] = newChannel
 
