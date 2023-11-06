@@ -6,6 +6,8 @@
 # Threadfin
 ## M3U Proxy for Plex DVR and Emby/Jellyfin Live TV. Based on xTeVe.
 
+Modified to handle streams that require a referer header to work.
+
 You can follow the old xTeVe documentation for now until I update it for Threadfin. Documentation for setup and configuration is [here](https://github.com/xteve-project/xTeVe-Documentation/blob/master/en/configuration.md).
 
 #### Donation
