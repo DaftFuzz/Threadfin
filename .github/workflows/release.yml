@@ -25,15 +25,7 @@ jobs:
         run: |
          go mod tidy && go mod vendor
          echo "Building Linux"
-         env GOOS=linux GOARCH=amd64 go build -o dist/Threadfin_linux_amd64
-
-      - name: Release
-        uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          automatic_release_tag: "latest"
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          files: dist/*
+         env GOOS=linux GOARCH=amd64 go build -o dist/Threadfin_linux_amd64      
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
@@ -55,3 +47,11 @@ jobs:
           no-cache: true
           platforms: linux/amd64
           tags: ${{ secrets.DOCKER_URL }}/daftfuzz/threadfin:dev
+
+      - name: Release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          automatic_release_tag: "latest"
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: dist/*
