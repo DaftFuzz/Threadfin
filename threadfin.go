@@ -188,10 +188,10 @@ func main() {
 		os.Exit(0)
 	}
 
-	err = src.BinaryUpdate()
-	if err != nil {
-		src.ShowError(err, 0)
-	}
+	// err = src.BinaryUpdate()
+	// if err != nil {
+	// 	src.ShowError(err, 0)
+	// }
 
 	err = src.StartSystem(false)
 	if err != nil {
