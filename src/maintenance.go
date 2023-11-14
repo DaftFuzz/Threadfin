@@ -66,7 +66,7 @@ func maintenance() {
 
 			// Update Threadfin (Binary)
 			if System.TimeForAutoUpdate == t.Format("1504") {
-				BinaryUpdate()
+				//BinaryUpdate()
 			}
 
 		}
