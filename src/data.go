@@ -977,8 +977,6 @@ func buildDatabaseDVR() (err error) {
 
 	System.ScanInProgress = 0
 	showInfo(fmt.Sprintf("All streams:%d", len(Data.Streams.All)))
-	showInfo(fmt.Sprintf("Active streams:%d", len(Data.Streams.Active)))
-	showInfo(fmt.Sprintf("Filter:%d", len(Data.Filter)))
 
 	sort.Strings(Data.StreamPreviewUI.Active)
 	sort.Strings(Data.StreamPreviewUI.Inactive)

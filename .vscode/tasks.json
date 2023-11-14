@@ -2,13 +2,10 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"type": "typescript",
-			"tsconfig": "ts/tsconfig.json",
-			"problemMatcher": [
-				"$tsc"
-			],
-			"group": "build",
-			"label": "tsc build"
+			"type": "shell",
+			"label": "Delete webUI.go",
+			"command": "git checkout HEAD -- src/webUI.go",
+			"group": "build"
 		}
 	]
 }

@@ -36,8 +36,6 @@ func StartWebserver() (err error) {
 
 	//http.HandleFunc("/auto/", Auto)
 
-	showInfo("DVR IP:" + System.IPAddress + ":" + Settings.Port)
-
 	var ips = len(System.IPAddressesV4) + len(System.IPAddressesV6) - 1
 	switch ips {
 

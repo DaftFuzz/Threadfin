@@ -93,7 +93,6 @@ func getProviderData(fileType, fileID string) (err error) {
 		}
 
 		// Daten überprüfen
-		showInfo("Check File:" + fileSource)
 		switch fileType {
 
 		case "m3u":
@@ -172,7 +171,6 @@ func getProviderData(fileType, fileID string) (err error) {
 			if strings.Contains(fileSource, "http://") || strings.Contains(fileSource, "https://") {
 
 				// Laden vom Remote Server
-				showInfo("Download:" + fileSource)
 				serverFileName, body, err = downloadFileFromServer(fileSource)
 
 			} else {
@@ -193,9 +191,6 @@ func getProviderData(fileType, fileID string) (err error) {
 		if err == nil {
 
 			err = saveDateFromProvider(fileSource, serverFileName, dataID, body)
-			if err == nil {
-				showInfo("Save File:" + fileSource + " [ID: " + dataID + "]")
-			}
 
 		}
 

@@ -234,7 +234,6 @@ func createXEPGMapping() {
 
 			var err error
 			var fileID = strings.TrimSuffix(getFilenameFromPath(file), path.Ext(getFilenameFromPath(file)))
-			showInfo("XEPG:" + "Parse XMLTV file: " + getProviderParameter(fileID, "xmltv", "name"))
 
 			//xmltv, err = getLocalXMLTV(file)
 			var xmltv XMLTV
@@ -363,8 +362,6 @@ func createXEPGDatabase() (err error) {
 		hash := md5.Sum([]byte(m3uID + groupTitle + tvgID + tvgName + uuidKey + uuidValue))
 		return hex.EncodeToString(hash[:])
 	}
-
-	showInfo("XEPG:" + "Update database")
 
 	// Kanal mit fehlenden Kanalnummern löschen.  Delete channel with missing channel numbers
 	for id := range Data.XEPG.Channels {
@@ -538,7 +535,6 @@ func createXEPGDatabase() (err error) {
 		}
 
 	}
-	showInfo("XEPG:" + "Save DB file")
 	err = saveMapToJSONFile(System.File.XEPG, Data.XEPG.Channels)
 	if err != nil {
 		return
@@ -549,8 +545,6 @@ func createXEPGDatabase() (err error) {
 
 // Kanäle automatisch zuordnen und das Mapping überprüfen
 func mapping() (err error) {
-	showInfo("XEPG:" + "Map channels")
-
 	for xepg, dxc := range Data.XEPG.Channels {
 
 		var xepgChannel XEPGChannelStruct
@@ -765,8 +759,6 @@ func createXMLTVFile() (err error) {
 		return
 	}
 
-	showInfo("XEPG:" + fmt.Sprintf("Create XMLTV file (%s)", System.File.XML))
-
 	var xepgXML XMLTV
 
 	xepgXML.Generator = System.Name
@@ -812,7 +804,6 @@ func createXMLTVFile() (err error) {
 	var xmlOutput = []byte(xml.Header + string(content))
 	writeByteToFile(System.File.XML, xmlOutput)
 
-	showInfo("XEPG:" + fmt.Sprintf("Compress XMLTV file (%s)", System.Compressed.GZxml))
 	err = compressGZIP(&xmlOutput, System.Compressed.GZxml)
 
 	xepgXML = XMLTV{}
@@ -1183,8 +1174,6 @@ func getLocalXMLTV(file string, xmltv *XMLTV) (err error) {
 
 // M3U Datei erstellen
 func createM3UFile() {
-
-	showInfo("XEPG:" + fmt.Sprintf("Create M3U file (%s)", System.File.M3U))
 	_, err := buildM3U([]string{})
 	if err != nil {
 		ShowError(err, 000)
@@ -1210,7 +1199,6 @@ func cleanupXEPG() {
 		sourceIDs = append(sourceIDs, source)
 	}
 
-	showInfo("XEPG:" + fmt.Sprintf("Cleanup database"))
 	Data.XEPG.XEPGCount = 0
 
 	for id, dxc := range Data.XEPG.Channels {

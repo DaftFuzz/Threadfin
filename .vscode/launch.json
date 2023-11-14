@@ -1,13 +1,13 @@
 {
     "version": "0.2.0",
-    "configurations": [
+    "configurations": [        
         {
-            "preLaunchTask": "tsc build",
-            "name": "Launch Package",
+            "preLaunchTask": "Delete webUI.go",
+            "name": "Launch Threadfin",
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "${fileDirname}",
+            "program": "threadfin.go",
             "args": ["-dev"]
         }
     ]
