@@ -4,12 +4,10 @@ FROM golang:1.18 AS builder
 
 # Download the source code
 RUN apt-get update && apt-get install -y git
-RUN git clone https://github.com/DaftFuzz/Threadfin.git /src
+COPY . /src
 
 WORKDIR /src
 
-RUN git checkout main
-RUN git pull
 RUN go mod tidy && go mod vendor
 RUN go build threadfin.go
 
