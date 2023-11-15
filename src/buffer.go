@@ -961,7 +961,6 @@ func thirdPartyBuffer(streamID int, playlistID string, useBackup bool, backupNum
 			return
 		}
 
-		showInfo(fmt.Sprintf("%s path:%s", bufferType, path))
 		showInfo("Streaming URL:" + url)
 
 		var tmpFile = fmt.Sprintf("%s%d.ts", tmpFolder, tmpSegment)
@@ -1113,10 +1112,6 @@ func thirdPartyBuffer(streamID int, playlistID string, useBackup bool, backupNum
 
 			}
 
-			if fileSize == 0 && !stream.Status {
-				showInfo("Streaming Status:Receive data from " + bufferType)
-			}
-
 			if !clientConnection(stream) {
 				cmd.Process.Kill()
 				f.Close()
@@ -1144,7 +1139,6 @@ func thirdPartyBuffer(streamID int, playlistID string, useBackup bool, backupNum
 				if tmpSegment == 1 && !stream.Status {
 					close(t)
 					close(streamStatus)
-					showInfo(fmt.Sprintf("Streaming Status:Buffering data from %s", bufferType))
 				}
 
 				f.Close()

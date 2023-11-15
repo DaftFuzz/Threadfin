@@ -45,11 +45,3 @@ jobs:
           no-cache: true
           platforms: linux/amd64
           tags: ${{ secrets.DOCKER_URL }}/daftfuzz/threadfin:dev
-
-      - name: Release
-        uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          automatic_release_tag: "latest"
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-          files: dist/*

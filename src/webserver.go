@@ -167,14 +167,6 @@ func Stream(w http.ResponseWriter, r *http.Request) {
 		}
 
 		showInfo(fmt.Sprintf("Buffer:true [%s]", Settings.Buffer))
-
-	default:
-		showInfo(fmt.Sprintf("Buffer:true [%s]", Settings.Buffer))
-
-	}
-
-	if Settings.Buffer != "-" {
-		showInfo(fmt.Sprintf("Buffer Size:%d KB", Settings.BufferSize))
 	}
 
 	showInfo(fmt.Sprintf("Channel Name:%s", streamInfo.Name))
