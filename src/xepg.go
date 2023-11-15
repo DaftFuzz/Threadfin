@@ -70,8 +70,6 @@ func buildXEPG(background bool) {
 				createXMLTVFile()
 				createM3UFile()
 
-				showInfo("XEPG:" + fmt.Sprintf("Ready to use"))
-
 				if Settings.CacheImages == true && System.ImageCachingInProgress == 0 {
 
 					go func() {
@@ -135,8 +133,6 @@ func buildXEPG(background bool) {
 
 				}
 
-				showInfo("XEPG:" + fmt.Sprintf("Ready to use"))
-
 				System.ScanInProgress = 0
 
 				// Cache löschen
@@ -180,7 +176,6 @@ func updateXEPG(background bool) {
 
 				createXMLTVFile()
 				createM3UFile()
-				showInfo("XEPG:" + fmt.Sprintf("Ready to use"))
 
 				System.ScanInProgress = 0
 
@@ -1232,8 +1227,6 @@ func cleanupXEPG() {
 		ShowError(err, 000)
 		return
 	}
-
-	showInfo("XEPG Channels:" + fmt.Sprintf("%d", Data.XEPG.XEPGCount))
 
 	if len(Data.Streams.Active) > 0 && Data.XEPG.XEPGCount == 0 {
 		showWarning(2005)

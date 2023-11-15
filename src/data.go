@@ -560,7 +560,6 @@ func saveXEpgMapping(request RequestStruct) (err error) {
 			cleanupXEPG()
 			System.ScanInProgress = 0
 			buildXEPG(false)
-			showInfo("XEPG:" + fmt.Sprintf("Ready to use"))
 
 			System.BackgroundProcess = false
 
@@ -976,7 +975,6 @@ func buildDatabaseDVR() (err error) {
 	}
 
 	System.ScanInProgress = 0
-	showInfo(fmt.Sprintf("All streams:%d", len(Data.Streams.All)))
 
 	sort.Strings(Data.StreamPreviewUI.Active)
 	sort.Strings(Data.StreamPreviewUI.Inactive)

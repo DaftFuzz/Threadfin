@@ -1,19 +1,16 @@
 # First stage. Building a binary
 # -----------------------------------------------------------------------------
-FROM golang:1.18 AS builder
-
-# Download the source code
-RUN apt-get update && apt-get install -y git
-COPY . /src
+FROM golang:1.21-alpine3.18 AS builder
 
 WORKDIR /src
+COPY . .
 
 RUN go mod tidy && go mod vendor
 RUN go build threadfin.go
 
 # Second stage. Creating an image
 # -----------------------------------------------------------------------------
-FROM ubuntu:22.04
+FROM alpine:3.18
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -49,10 +46,10 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$THREADFIN
 # Set working directory
 WORKDIR $THREADFIN_HOME
 
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y ca-certificates curl ffmpeg vlc
+#RUN apt-get update && apt-get upgrade -y
+RUN apk add --no-cache ca-certificates curl ffmpeg vlc
 
-RUN DEBIAN_FRONTEND=noninteractive TZ="America/New_York" apt-get -y install tzdata
+RUN TZ="America/New_York" apk add --no-cache tzdata
 
 RUN mkdir -p $THREADFIN_BIN
 
