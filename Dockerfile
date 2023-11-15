@@ -35,8 +35,8 @@ ENV THREADFIN_CONF=/home/threadfin/conf
 ENV THREADFIN_HOME=/home/threadfin
 ENV THREADFIN_TEMP=/tmp/threadfin
 ENV THREADFIN_CACHE=/home/threadfin/cache
-ENV THREADFIN_UID=31337
-ENV THREADFIN_GID=31337
+ENV PUID=31337
+ENV PGID=31337
 ENV THREADFIN_USER=threadfin
 ENV THREADFIN_BRANCH=main
 ENV THREADFIN_DEBUG=0
@@ -57,7 +57,7 @@ RUN DEBIAN_FRONTEND=noninteractive TZ="America/New_York" apt-get -y install tzda
 RUN mkdir -p $THREADFIN_BIN
 
 # Copy built binary from builder image
-COPY --chown=${THREADFIN_UID} --from=builder [ "/src/threadfin", "${THREADFIN_BIN}/" ]
+COPY --chown=${PUID} --from=builder [ "/src/threadfin", "${THREADFIN_BIN}/" ]
 
 # Set binary permissions
 RUN chmod +rx $THREADFIN_BIN/threadfin
