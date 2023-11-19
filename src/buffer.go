@@ -1121,6 +1121,7 @@ func thirdPartyBuffer(streamID int, playlistID string, useBackup bool, backupNum
 
 			n, err := reader.Read(buffer)
 			if err == io.EOF {
+				showInfo(bufferType + ":Encountered EOF. Breaking")
 				break
 			}
 
