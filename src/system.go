@@ -122,19 +122,19 @@ func loadSettings() (settings SettingsStruct, err error) {
 	dataMap["m3u"] = make(map[string]interface{})
 	dataMap["hdhr"] = make(map[string]interface{})
 
-	defaults["api"] = false
+	defaults["api"] = true
 	defaults["authentication.api"] = false
 	defaults["authentication.m3u"] = false
 	defaults["authentication.pms"] = false
-	defaults["authentication.web"] = false
+	defaults["authentication.web"] = true
 	defaults["authentication.xml"] = false
 	defaults["backup.keep"] = 10
 	defaults["backup.path"] = System.Folder.Backup
-	defaults["buffer"] = "-"
-	defaults["buffer.size.kb"] = 1024
-	defaults["buffer.timeout"] = 500
+	defaults["buffer"] = "ffmpeg"
+	defaults["buffer.size.kb"] = 512
+	defaults["buffer.timeout"] = 100
 	defaults["cache.images"] = false
-	defaults["epgSource"] = "PMS"
+	defaults["epgSource"] = "XEPG"
 	defaults["ffmpeg.options"] = System.FFmpeg.DefaultOptions
 	defaults["vlc.options"] = System.VLC.DefaultOptions
 	defaults["files"] = dataMap
@@ -157,9 +157,9 @@ func loadSettings() (settings SettingsStruct, err error) {
 	defaults["enableNonAscii"] = false
 	defaults["epgCategories"] = "Kids:kids|News:news|Movie:movie|Series:series|Sports:sports"
 	defaults["epgCategoriesColors"] = "kids:mediumpurple|news:tomato|movie:royalblue|series:gold|sports:yellowgreen"
-	defaults["tuner"] = 1
+	defaults["tuner"] = 20
 	defaults["update"] = []string{"0000"}
-	defaults["user.agent"] = System.Name
+	defaults["user.agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
 	defaults["uuid"] = createUUID()
 	defaults["udpxy"] = ""
 	defaults["version"] = System.DBVersion

@@ -468,7 +468,7 @@
     "userAgent": {
       "title": "User Agent",
       "description": "User Agent for HTTP requests. For every HTTP connection, this value is used for the user agent. Should only be changed if Threadfin is blocked.",
-      "placeholder": "Threadfin"
+      "placeholder": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
     },
     "backupPath": {
       "title": "Location for automatic backups",
