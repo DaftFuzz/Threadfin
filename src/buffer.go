@@ -988,7 +988,7 @@ func thirdPartyBuffer(streamID int, playlistID string, useBackup bool, backupNum
 					}
 
 					if len(channelReferer) != 0 {
-						args = append(args, "-headers", "Referer:"+channelReferer)
+						args = append(args, "-referer", channelReferer)
 					}
 				}
 
